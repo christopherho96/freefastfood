@@ -1,16 +1,14 @@
-from sys import platform
 from selenium import webdriver
 import time
-survey_url="https://survey.medallia.ca/?McD-GSS-FeedlessSurvey"
-chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
-if platform == "darwin":
-    chrome_path = 'open -a /Applications/Google\ Chrome.app %s'
+email = input("Enter your email address to receive coupon: ")
+survey_url = "https://survey.medallia.ca/?McD-GSS-FeedlessSurvey"
 
 try:
     browser = webdriver.Chrome('./chromedriver')
     browser.get(survey_url)
 except Exception as e:
     print(e)
+    quit()
 
 def click_next_button():
     next_button = browser.find_element_by_id("buttonNext")
@@ -127,14 +125,14 @@ try:
 
     click_next_button()
 
-    radio_boxs  =browser.find_elements_by_class_name("indicatorRadio")
-    email_coupon = radio_boxs[0]
+    radio_boxes = browser.find_elements_by_class_name("indicatorRadio")
+    email_coupon = radio_boxes[0]
     email_coupon.click()
 
     click_finish_button()
 
     email_text_box = browser.find_element_by_class_name("textField_textField")
-    email_text_box.send_keys("ho.christopher.tak@gmail.com")
+    email_text_box.send_keys(email)
 
     click_finish_button()
 
